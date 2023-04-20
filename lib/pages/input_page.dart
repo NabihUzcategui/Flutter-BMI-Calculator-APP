@@ -44,7 +44,6 @@ class _InputPageState extends State<InputPage> {
                     onPress: () {
                       setState(() {
                         selectedGender = Gender.male;
-                        print(selectedGender);
                       });
                     },
                     colorCard: selectedGender == Gender.male 
@@ -61,7 +60,6 @@ class _InputPageState extends State<InputPage> {
                     onPress: () {
                       setState(() {
                         selectedGender = Gender.female;
-                        print(selectedGender);
                       });
                     },
                     colorCard: selectedGender == Gender.female 
@@ -240,15 +238,15 @@ class RoundIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
-      child: Icon(icon),
-      shape: CircleBorder(),
+      shape: const CircleBorder(),
       elevation: 0,
       fillColor: kFloatingActionButtonColor,
-      constraints: BoxConstraints.tightFor(
+      constraints: const BoxConstraints.tightFor(
         width: 56.0,
         height: 56.0,
       ),
       onPressed: onPressed,
+      child: Icon(icon),
     );
   }
 }
