@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bmi_calculator_app/components/calucalator_brain.dart';
+import 'package:flutter_bmi_calculator_app/pages/results_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../constants/constants.dart';
 import '../widges/widgets.dart';
@@ -21,9 +23,9 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
 
   Gender? selectedGender;
-  int height = 180;
-  int weight = 45;
-  int age = 15;
+  int height = 170;
+  int weight = 60;
+  int age = 18;
 
   @override
   Widget build(BuildContext context) {
@@ -211,12 +213,20 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
 
-          Container(
-            margin: const EdgeInsets.only(top: 8.0),
-            width: double.infinity,
-            height: kBottomContainerHeght,
-            color: kBottomContainerColors,
-          )
+          BottomButton(
+            buttontitle: 'CALCULATE', 
+            onTap: () {
+
+              CalculatorBrain calc = CalculatorBrain(height, weight);
+
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsPage(
+                bmiResult: calc.calculatedBMI(),
+                resultText: calc.getResult(),
+                interpretation: calc.getInterpretation(),
+              )));
+            },
+          ),
+          
         ],
       ),
     );
@@ -224,32 +234,9 @@ class _InputPageState extends State<InputPage> {
 }
 
 
-class RoundIconButton extends StatelessWidget {
 
-  final IconData icon;
-  final VoidCallback onPressed;
 
-  const RoundIconButton({
-    super.key, 
-    required this.icon, 
-    required this.onPressed
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      shape: const CircleBorder(),
-      elevation: 0,
-      fillColor: kFloatingActionButtonColor,
-      constraints: const BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
-      ),
-      onPressed: onPressed,
-      child: Icon(icon),
-    );
-  }
-}
 
 
 
